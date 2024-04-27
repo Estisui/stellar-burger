@@ -5,8 +5,12 @@ import {
   useDispatch as dispatchHook,
   useSelector as selectorHook
 } from 'react-redux';
+import { configureStore } from '@reduxjs/toolkit';
+import rootReducer from './rootReducer';
 
-const store = {};
+const store = configureStore({
+  reducer: rootReducer
+});
 
 export type RootState = any;
 
