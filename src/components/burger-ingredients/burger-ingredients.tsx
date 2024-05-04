@@ -4,9 +4,9 @@ import { useInView } from 'react-intersection-observer';
 import { TTabMode } from '@utils-types';
 import { BurgerIngredientsUI } from '../ui/burger-ingredients';
 import {
-  buns,
-  mains,
-  sauces
+  getBuns,
+  getMains,
+  getSauces
 } from '../../../src/services/slices/ingredientsSlice';
 import { useSelector } from 'react-redux';
 
@@ -52,9 +52,9 @@ export const BurgerIngredients: FC = () => {
   return (
     <BurgerIngredientsUI
       currentTab={currentTab}
-      buns={useSelector(buns)}
-      mains={useSelector(mains)}
-      sauces={useSelector(sauces)}
+      buns={useSelector(getBuns)}
+      mains={useSelector(getMains)}
+      sauces={useSelector(getSauces)}
       titleBunRef={titleBunRef}
       titleMainRef={titleMainRef}
       titleSaucesRef={titleSaucesRef}

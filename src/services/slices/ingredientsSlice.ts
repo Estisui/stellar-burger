@@ -14,8 +14,9 @@ const initialState: TIngridietsState = {
   error: null
 };
 
-export const getIngredients = createAsyncThunk('ingredients/get', async () =>
-  getIngredientsApi()
+export const getIngredientsThunk = createAsyncThunk(
+  'ingredients/get',
+  async () => getIngredientsApi()
 );
 
 const ingredientsSlice = createSlice({
@@ -23,32 +24,33 @@ const ingredientsSlice = createSlice({
   initialState,
   reducers: {},
   selectors: {
-    ingredients: (state) => state.ingredients,
-    buns: (state) =>
+    getIngredients: (state) => state.ingredients,
+    getBuns: (state) =>
       state.ingredients.filter((ingredient) => ingredient.type === 'bun'),
-    mains: (state) =>
+    getMains: (state) =>
       state.ingredients.filter((ingredient) => ingredient.type === 'main'),
-    sauces: (state) =>
+    getSauces: (state) =>
       state.ingredients.filter((ingredient) => ingredient.type === 'sauce')
   },
   extraReducers: (builder) => {
     builder
-      .addCase(getIngredients.pending, (state) => {
+      .addCase(getIngredientsThunk.pending, (state) => {
         state.loading = true;
         state.error = null;
       })
-      .addCase(getIngredients.rejected, (state, action) => {
+      .addCase(getIngredientsThunk.rejected, (state, action) => {
         state.loading = false;
         if (action.error.message) {
           state.error = action.error.message;
         }
       })
-      .addCase(getIngredients.fulfilled, (state, action) => {
+      .addCase(getIngredientsThunk.fulfilled, (state, action) => {
         state.loading = false;
         state.ingredients = action.payload;
       });
   }
 });
 
-export const { ingredients, buns, mains, sauces } = ingredientsSlice.selectors;
+export const { getIngredients, getBuns, getMains, getSauces } =
+  ingredientsSlice.selectors;
 export const ingredientsReducer = ingredientsSlice.reducer;

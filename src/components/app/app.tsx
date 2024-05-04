@@ -18,13 +18,13 @@ import { ProtectedRoute } from '../protectedRoute';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../services/store';
-import { getIngredients } from '../../services/slices/ingredientsSlice';
+import { getIngredientsThunk } from '../../services/slices/ingredientsSlice';
 
 const App = () => {
   const dispatch = useDispatch<AppDispatch>();
 
   useEffect(() => {
-    dispatch(getIngredients());
+    dispatch(getIngredientsThunk());
   }, [dispatch]);
 
   return (
