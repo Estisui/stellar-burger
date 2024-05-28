@@ -4,13 +4,13 @@ import { TIngredient } from '@utils-types';
 
 type TIngridietsState = {
   ingredients: Array<TIngredient>;
-  loading: boolean;
+  isLoading: boolean;
   error: string | null;
 };
 
 const initialState: TIngridietsState = {
   ingredients: [],
-  loading: false,
+  isLoading: false,
   error: null
 };
 
@@ -35,17 +35,17 @@ const ingredientsSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(getIngredientsThunk.pending, (state) => {
-        state.loading = true;
+        state.isLoading = true;
         state.error = null;
       })
       .addCase(getIngredientsThunk.rejected, (state, action) => {
-        state.loading = false;
+        state.isLoading = false;
         if (action.error.message) {
           state.error = action.error.message;
         }
       })
       .addCase(getIngredientsThunk.fulfilled, (state, action) => {
-        state.loading = false;
+        state.isLoading = false;
         state.ingredients = action.payload;
       });
   }
