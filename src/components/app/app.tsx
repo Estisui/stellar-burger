@@ -24,6 +24,7 @@ const App = () => {
   const dispatch = useDispatch<AppDispatch>();
 
   useEffect(() => {
+    console.log('asd');
     dispatch(getIngredientsThunk());
   }, [dispatch]);
 

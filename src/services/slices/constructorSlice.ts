@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import { TConstructorIngredient, TOrder } from '@utils-types';
 
 type TConstructorState = {
-  bun: {
+  bun?: {
     price: number;
   };
   ingredients: Array<TConstructorIngredient>;
@@ -11,9 +11,6 @@ type TConstructorState = {
 };
 
 const initialState: TConstructorState = {
-  bun: {
-    price: 0
-  },
   ingredients: [],
   orderRequest: false,
   orderModalData: null
