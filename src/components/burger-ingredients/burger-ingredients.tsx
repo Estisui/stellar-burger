@@ -7,7 +7,7 @@ import {
   getBuns,
   getMains,
   getSauces
-} from '../../../src/services/slices/ingredientsSlice';
+} from '../../services/slices/ingredientsSlice';
 import { useSelector } from 'react-redux';
 
 export const BurgerIngredients: FC = () => {

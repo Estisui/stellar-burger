@@ -2,13 +2,13 @@ import { getIngredientsApi } from '@api';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { TIngredient } from '@utils-types';
 
-type TIngridietsState = {
+type TIngredietsState = {
   ingredients: Array<TIngredient>;
   isLoading: boolean;
   error: string | null;
 };
 
-const initialState: TIngridietsState = {
+const initialState: TIngredietsState = {
   ingredients: [],
   isLoading: false,
   error: null
@@ -20,7 +20,7 @@ export const getIngredientsThunk = createAsyncThunk(
 );
 
 const ingredientsSlice = createSlice({
-  name: 'ingredients',
+  name: 'ingredientsSlice',
   initialState,
   reducers: {},
   selectors: {

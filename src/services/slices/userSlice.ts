@@ -7,7 +7,7 @@ const initialState: TUser = {
 };
 
 const userSlice = createSlice({
-  name: 'ingredients',
+  name: 'userSlice',
   initialState,
   reducers: {},
   selectors: {
