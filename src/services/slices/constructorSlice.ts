@@ -3,6 +3,7 @@ import { TConstructorIngredient, TOrder } from '@utils-types';
 
 type TConstructorState = {
   bun?: {
+    _id: number;
     price: number;
   };
   ingredients: Array<TConstructorIngredient>;

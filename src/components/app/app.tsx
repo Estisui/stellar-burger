@@ -13,7 +13,7 @@ import '../../index.css';
 import styles from './app.module.css';
 
 import { AppHeader, IngredientDetails, Modal, OrderInfo } from '@components';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, useNavigate } from 'react-router-dom';
 import { ProtectedRoute } from '../protectedRoute';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../services/store';
@@ -22,9 +22,9 @@ import { getIngredientsThunk } from '../../services/slices/ingredientsSlice';
 
 const App = () => {
   const dispatch = useDispatch<AppDispatch>();
+  const navigate = useNavigate();
 
   useEffect(() => {
-    console.log('asd');
     dispatch(getIngredientsThunk());
   }, [dispatch]);
 
@@ -117,12 +117,7 @@ const App = () => {
         <Route
           path='/ingredients/:id'
           element={
-            <Modal
-              title='Детали ингредиента'
-              onClose={function (): void {
-                throw new Error('Function not implemented.');
-              }}
-            >
+            <Modal title='Детали ингредиента' onClose={() => navigate(-1)}>
               <IngredientDetails />
             </Modal>
           }
