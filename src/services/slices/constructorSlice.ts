@@ -1,11 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { TConstructorIngredient, TOrder } from '@utils-types';
+import type { PayloadAction } from '@reduxjs/toolkit';
 
 type TConstructorState = {
-  bun?: {
-    _id: number;
-    price: number;
-  };
+  bun?: TConstructorIngredient;
   ingredients: Array<TConstructorIngredient>;
   orderRequest: boolean;
   orderModalData: TOrder | null;
@@ -20,7 +18,15 @@ const initialState: TConstructorState = {
 const constructorSlice = createSlice({
   name: 'constructorSlice',
   initialState,
-  reducers: {},
+  reducers: {
+    addIngredient: (state, action: PayloadAction<TConstructorIngredient>) => {
+      if (action.payload.type === 'bun') {
+        state.bun = action.payload;
+      } else {
+        state.ingredients.push(action.payload);
+      }
+    }
+  },
   selectors: {
     getConstructorItems: (state) => ({
       bun: state.bun,
@@ -33,4 +39,5 @@ const constructorSlice = createSlice({
 
 export const { getConstructorItems, getOrderModalData, getOrderRequest } =
   constructorSlice.selectors;
+export const { addIngredient } = constructorSlice.actions;
 export const constructorReducer = constructorSlice.reducer;
