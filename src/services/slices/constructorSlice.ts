@@ -25,6 +25,28 @@ const constructorSlice = createSlice({
       } else {
         state.ingredients.push(action.payload);
       }
+    },
+    moveUp: (state, action: PayloadAction<number>) => {
+      const index = action.payload;
+      if (index > 0) {
+        [state.ingredients[index], state.ingredients[index - 1]] = [
+          state.ingredients[index - 1],
+          state.ingredients[index]
+        ];
+      }
+    },
+    moveDown: (state, action: PayloadAction<number>) => {
+      const index = action.payload;
+      if (index < state.ingredients.length - 1) {
+        [state.ingredients[index], state.ingredients[index + 1]] = [
+          state.ingredients[index + 1],
+          state.ingredients[index]
+        ];
+      }
+    },
+    deleteIngredient: (state, action: PayloadAction<number>) => {
+      const index = action.payload;
+      state.ingredients.splice(index, 1);
     }
   },
   selectors: {
@@ -39,5 +61,6 @@ const constructorSlice = createSlice({
 
 export const { getConstructorItems, getOrderModalData, getOrderRequest } =
   constructorSlice.selectors;
-export const { addIngredient } = constructorSlice.actions;
+export const { addIngredient, moveUp, moveDown, deleteIngredient } =
+  constructorSlice.actions;
 export const constructorReducer = constructorSlice.reducer;
