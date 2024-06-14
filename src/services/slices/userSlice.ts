@@ -11,9 +11,10 @@ const userSlice = createSlice({
   initialState,
   reducers: {},
   selectors: {
-    getUser: (state) => state
+    getUser: (state) => state,
+    getUserIsAuthorized: (state) => state.email && state.name
   }
 });
 
-export const { getUser } = userSlice.selectors;
+export const { getUser, getUserIsAuthorized } = userSlice.selectors;
 export const userReducer = userSlice.reducer;
