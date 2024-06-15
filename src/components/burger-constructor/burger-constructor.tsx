@@ -8,7 +8,7 @@ import {
   getOrderModalData
 } from '../../services/slices/constructorSlice';
 import { useNavigate } from 'react-router-dom';
-import { getUserIsAuthorized } from '../../services/slices/userSlice';
+import { getUserIsAuthenticated } from '../../services/slices/userSlice';
 
 export const BurgerConstructor: FC = () => {
   const navigate = useNavigate();
@@ -16,11 +16,11 @@ export const BurgerConstructor: FC = () => {
   const constructorItems = useSelector(getConstructorItems);
   const orderRequest = useSelector(getOrderRequest);
   const orderModalData = useSelector(getOrderModalData);
-  const userIsAuthorized = useSelector(getUserIsAuthorized);
+  const userIsAuthenticated = useSelector(getUserIsAuthenticated);
 
   const onOrderClick = () => {
     if (!constructorItems.bun || orderRequest) return;
-    if (!userIsAuthorized) {
+    if (!userIsAuthenticated) {
       navigate('/login');
     }
   };
