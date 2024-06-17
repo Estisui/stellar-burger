@@ -53,14 +53,11 @@ const constructorSlice = createSlice({
     getConstructorItems: (state) => ({
       bun: state.bun,
       ingredients: state.ingredients
-    }),
-    getOrderRequest: (state) => state.orderRequest,
-    getOrderModalData: (state) => state.orderModalData
+    })
   }
 });
 
-export const { getConstructorItems, getOrderModalData, getOrderRequest } =
-  constructorSlice.selectors;
+export const { getConstructorItems } = constructorSlice.selectors;
 export const { addIngredient, moveUp, moveDown, deleteIngredient } =
   constructorSlice.actions;
 export const constructorReducer = constructorSlice.reducer;

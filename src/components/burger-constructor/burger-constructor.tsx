@@ -2,13 +2,13 @@ import { FC, useMemo } from 'react';
 import { TConstructorIngredient } from '@utils-types';
 import { BurgerConstructorUI } from '@ui';
 import { useSelector } from 'react-redux';
-import {
-  getConstructorItems,
-  getOrderRequest,
-  getOrderModalData
-} from '../../services/slices/constructorSlice';
+import { getConstructorItems } from '../../services/slices/constructorSlice';
 import { useNavigate } from 'react-router-dom';
 import { getUserIsAuthenticated } from '../../services/slices/userSlice';
+import {
+  getOrderModalData,
+  getOrderRequest
+} from '../../services/slices/orderSlice';
 
 export const BurgerConstructor: FC = () => {
   const navigate = useNavigate();
