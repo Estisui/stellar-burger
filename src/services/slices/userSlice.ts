@@ -2,12 +2,13 @@ import {
   TLoginData,
   TRegisterData,
   loginUserApi,
+  logoutApi,
   registerUserApi,
   updateUserApi
 } from '@api';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { TUser } from '@utils-types';
-import { setCookie } from '../../utils/cookie';
+import { deleteCookie, setCookie } from '../../utils/cookie';
 
 type TUserState = {
   isAuthChecked: boolean;
@@ -49,10 +50,33 @@ export const updateUser = createAsyncThunk(
   async (user: TRegisterData) => await updateUserApi(user)
 );
 
+export const logoutUser = createAsyncThunk(
+  'user/logoutUser',
+  (_, { dispatch }) => {
+    logoutApi()
+      .then(() => {
+        localStorage.clear(); // очищаем refreshToken
+        deleteCookie('accessToken'); // очищаем accessToken
+        dispatch(userLogout()); // удаляем пользователя из хранилища
+      })
+      .catch(() => {
+        console.log('Ошибка выполнения выхода');
+      });
+  }
+);
+
 const userSlice = createSlice({
   name: 'userSlice',
   initialState,
-  reducers: {},
+  reducers: {
+    userLogout: (state) => {
+      state.data = {
+        name: '',
+        email: ''
+      };
+      state.isAuthenticated = false;
+    }
+  },
   selectors: {
     getUserData: (state) => state.data,
     getUserIsAuthenticated: (state) => state.isAuthenticated
@@ -93,5 +117,6 @@ const userSlice = createSlice({
   }
 });
 
+export const { userLogout } = userSlice.actions;
 export const { getUserData, getUserIsAuthenticated } = userSlice.selectors;
 export const userReducer = userSlice.reducer;
