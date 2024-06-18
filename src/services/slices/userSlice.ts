@@ -1,6 +1,7 @@
 import {
   TLoginData,
   TRegisterData,
+  getUserApi,
   loginUserApi,
   logoutApi,
   registerUserApi,
@@ -50,33 +51,18 @@ export const updateUser = createAsyncThunk(
   async (user: TRegisterData) => await updateUserApi(user)
 );
 
-export const logoutUser = createAsyncThunk(
-  'user/logoutUser',
-  (_, { dispatch }) => {
-    logoutApi()
-      .then(() => {
-        localStorage.clear(); // очищаем refreshToken
-        deleteCookie('accessToken'); // очищаем accessToken
-        dispatch(userLogout()); // удаляем пользователя из хранилища
-      })
-      .catch(() => {
-        console.log('Ошибка выполнения выхода');
-      });
-  }
+export const logoutUser = createAsyncThunk('user/logoutUser', async () =>
+  logoutApi()
+);
+
+export const getUser = createAsyncThunk('user/getUser', async () =>
+  getUserApi()
 );
 
 const userSlice = createSlice({
   name: 'userSlice',
   initialState,
-  reducers: {
-    userLogout: (state) => {
-      state.data = {
-        name: '',
-        email: ''
-      };
-      state.isAuthenticated = false;
-    }
-  },
+  reducers: {},
   selectors: {
     getUserData: (state) => state.data,
     getUserIsAuthenticated: (state) => state.isAuthenticated
@@ -113,10 +99,23 @@ const userSlice = createSlice({
         state.data = action.payload.user;
         state.isAuthenticated = true;
         state.isAuthChecked = true;
+      })
+      .addCase(getUser.fulfilled, (state, action) => {
+        state.data = action.payload.user;
+        state.isAuthenticated = true;
+        state.isAuthChecked = true;
+      })
+      .addCase(logoutUser.fulfilled, (state) => {
+        localStorage.clear();
+        deleteCookie('accessToken');
+        state.data = {
+          name: '',
+          email: ''
+        };
+        state.isAuthenticated = false;
       });
   }
 });
 
-export const { userLogout } = userSlice.actions;
 export const { getUserData, getUserIsAuthenticated } = userSlice.selectors;
 export const userReducer = userSlice.reducer;
