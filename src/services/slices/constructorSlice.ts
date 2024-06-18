@@ -1,18 +1,15 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { TConstructorIngredient, TOrder } from '@utils-types';
 import type { PayloadAction } from '@reduxjs/toolkit';
+import { orderBurger } from './orderSlice';
 
 type TConstructorState = {
   bun?: TConstructorIngredient;
   ingredients: Array<TConstructorIngredient>;
-  orderRequest: boolean;
-  orderModalData: TOrder | null;
 };
 
 const initialState: TConstructorState = {
-  ingredients: [],
-  orderRequest: false,
-  orderModalData: null
+  ingredients: []
 };
 
 const constructorSlice = createSlice({
@@ -53,11 +50,27 @@ const constructorSlice = createSlice({
     getConstructorItems: (state) => ({
       bun: state.bun,
       ingredients: state.ingredients
-    })
+    }),
+    getIngredientsIds: (state) => {
+      if (state.bun) {
+        return [
+          state.bun._id,
+          ...state.ingredients.map((ingredient) => ingredient._id)
+        ];
+      }
+      return [];
+    }
+  },
+  extraReducers: (builder) => {
+    builder.addCase(orderBurger.fulfilled, (state) => {
+      state.bun = undefined;
+      state.ingredients = [];
+    });
   }
 });
 
-export const { getConstructorItems } = constructorSlice.selectors;
+export const { getConstructorItems, getIngredientsIds } =
+  constructorSlice.selectors;
 export const { addIngredient, moveUp, moveDown, deleteIngredient } =
   constructorSlice.actions;
 export const constructorReducer = constructorSlice.reducer;
