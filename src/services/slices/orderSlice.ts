@@ -1,13 +1,15 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { TOrder } from '@utils-types';
-import { orderBurgerApi } from '@api';
+import { getOrdersApi, orderBurgerApi } from '@api';
 
 type TOrderState = {
+  orders: TOrder[];
   orderRequest: boolean;
   data: TOrder | null;
 };
 
 const initialState: TOrderState = {
+  orders: [],
   orderRequest: false,
   data: null
 };
@@ -15,6 +17,10 @@ const initialState: TOrderState = {
 export const orderBurger = createAsyncThunk(
   'order/orderBurger',
   async (data: string[]) => await orderBurgerApi(data)
+);
+
+export const getOrdersThunk = createAsyncThunk('orders/get', async () =>
+  getOrdersApi()
 );
 
 const orderSlice = createSlice({
@@ -41,6 +47,9 @@ const orderSlice = createSlice({
       .addCase(orderBurger.fulfilled, (state, action) => {
         state.orderRequest = false;
         state.data = action.payload.order;
+      })
+      .addCase(getOrdersThunk.fulfilled, (state, action) => {
+        state.orders = action.payload;
       });
   }
 });
