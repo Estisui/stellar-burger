@@ -39,12 +39,7 @@ const App = () => {
           <Route
             path=':number'
             element={
-              <Modal
-                title='Order ID'
-                onClose={function (): void {
-                  throw new Error('Function not implemented.');
-                }}
-              >
+              <Modal title='Order ID' onClose={() => navigate(-1)}>
                 <OrderInfo />
               </Modal>
             }
@@ -103,12 +98,7 @@ const App = () => {
             <Route
               path=':number'
               element={
-                <Modal
-                  title='Order ID'
-                  onClose={function (): void {
-                    throw new Error('Function not implemented.');
-                  }}
-                >
+                <Modal title='Order ID' onClose={() => navigate(-1)}>
                   <OrderInfo />
                 </Modal>
               }

@@ -33,6 +33,7 @@ export const BurgerConstructor: FC = () => {
     }
     dispatch(orderBurger(ingredientsIds));
   };
+
   const closeOrderModal = () => {
     dispatch(clearRequestData());
   };
