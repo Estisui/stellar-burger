@@ -33,6 +33,7 @@ const orderSlice = createSlice({
     }
   },
   selectors: {
+    getOrders: (state) => state.orders,
     getOrderRequest: (state) => state.orderRequest,
     getOrderModalData: (state) => state.data
   },
@@ -54,6 +55,7 @@ const orderSlice = createSlice({
   }
 });
 
-export const { getOrderModalData, getOrderRequest } = orderSlice.selectors;
+export const { getOrders, getOrderModalData, getOrderRequest } =
+  orderSlice.selectors;
 export const { clearRequestData } = orderSlice.actions;
 export const orderReducer = orderSlice.reducer;
