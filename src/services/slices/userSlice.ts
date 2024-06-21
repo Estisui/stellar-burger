@@ -13,12 +13,14 @@ import { deleteCookie, setCookie } from '../../utils/cookie';
 
 type TUserState = {
   isLoading: boolean;
+  isAuthChecked: boolean;
   isAuthenticated: boolean;
   data: TUser;
 };
 
 const initialState: TUserState = {
   isLoading: false,
+  isAuthChecked: false,
   isAuthenticated: false,
   data: {
     name: '',
@@ -62,7 +64,8 @@ const userSlice = createSlice({
   selectors: {
     getUserData: (state) => state.data,
     getUserIsAuthenticated: (state) => state.isAuthenticated,
-    getUserIsLoading: (state) => state.isLoading
+    getUserIsLoading: (state) => state.isLoading,
+    getUserIsAuthChecked: (state) => state.isAuthChecked
   },
   extraReducers: (builder) => {
     builder
@@ -104,11 +107,13 @@ const userSlice = createSlice({
       })
       .addCase(getUser.rejected, (state) => {
         state.isLoading = false;
+        state.isAuthChecked = true;
       })
       .addCase(getUser.fulfilled, (state, action) => {
         state.data = action.payload.user;
         state.isLoading = false;
         state.isAuthenticated = true;
+        state.isAuthChecked = true;
       })
       .addCase(logoutUser.pending, (state) => {
         state.isLoading = true;
@@ -129,6 +134,10 @@ const userSlice = createSlice({
   }
 });
 
-export const { getUserData, getUserIsAuthenticated, getUserIsLoading } =
-  userSlice.selectors;
+export const {
+  getUserData,
+  getUserIsAuthenticated,
+  getUserIsLoading,
+  getUserIsAuthChecked
+} = userSlice.selectors;
 export const userReducer = userSlice.reducer;
