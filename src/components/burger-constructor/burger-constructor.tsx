@@ -30,6 +30,7 @@ export const BurgerConstructor: FC = () => {
     if (!constructorItems.bun || orderRequest) return;
     if (!userIsAuthenticated) {
       navigate('/login');
+      return;
     }
     dispatch(orderBurger(ingredientsIds));
   };
