@@ -13,7 +13,7 @@ import '../../index.css';
 import styles from './app.module.css';
 
 import { AppHeader, IngredientDetails, Modal, OrderInfo } from '@components';
-import { Routes, Route, useNavigate } from 'react-router-dom';
+import { Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 import { ProtectedRoute } from '../protectedRoute';
 import { useDispatch } from '../../services/store';
 import { useEffect } from 'react';
@@ -23,6 +23,10 @@ import { getUser } from '../../services/slices/userSlice';
 const App = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const location = useLocation();
+
+  const background = location.state && location.state.background;
+  console.log(background, location);
 
   useEffect(() => {
     dispatch(getIngredientsThunk());
@@ -32,18 +36,13 @@ const App = () => {
   return (
     <div className={styles.app}>
       <AppHeader />
-      <Routes>
+      <Routes location={background || location}>
         <Route path='/' element={<ConstructorPage />} />
         <Route path='/feed'>
           <Route index element={<Feed />} />
-          <Route
-            path=':number'
-            element={
-              <Modal title='Order ID' onClose={() => navigate(-1)}>
-                <OrderInfo />
-              </Modal>
-            }
-          />
+          {!background && (
+            <Route path='/feed/:number' element={<OrderInfo />} />
+          )}
         </Route>
         <Route
           path='/login'
@@ -95,26 +94,42 @@ const App = () => {
                 </ProtectedRoute>
               }
             />
-            <Route
-              path=':number'
-              element={
-                <Modal title='Order ID' onClose={() => navigate(-1)}>
-                  <OrderInfo />
-                </Modal>
-              }
-            />
+            {!background && <Route path=':number' element={<OrderInfo />} />}
           </Route>
         </Route>
-        <Route
-          path='/ingredients/:id'
-          element={
-            <Modal title='Детали ингредиента' onClose={() => navigate(-1)}>
-              <IngredientDetails />
-            </Modal>
-          }
-        />
+        {!background && (
+          <Route path='/ingredients/:id' element={<IngredientDetails />} />
+        )}
         <Route path='*' element={<NotFound404 />} />
       </Routes>
+      {background && (
+        <Routes>
+          <Route
+            path='/feed/:number'
+            element={
+              <Modal title='Order ID' onClose={() => navigate(-1)}>
+                <OrderInfo />
+              </Modal>
+            }
+          />
+          <Route
+            path='/profile/orders/:number'
+            element={
+              <Modal title='Order ID' onClose={() => navigate(-1)}>
+                <OrderInfo />
+              </Modal>
+            }
+          />
+          <Route
+            path='/ingredients/:id'
+            element={
+              <Modal title='Детали ингредиента' onClose={() => navigate(-1)}>
+                <IngredientDetails />
+              </Modal>
+            }
+          />
+        </Routes>
+      )}
     </div>
   );
 };
