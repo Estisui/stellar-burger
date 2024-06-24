@@ -26,7 +26,6 @@ const App = () => {
   const location = useLocation();
 
   const background = location.state && location.state.background;
-  console.log(background, location);
 
   useEffect(() => {
     dispatch(getIngredientsThunk());
