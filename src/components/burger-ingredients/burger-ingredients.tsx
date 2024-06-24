@@ -8,12 +8,12 @@ import {
   getMains,
   getSauces
 } from '../../services/slices/ingredientsSlice';
-import { useSelector } from 'react-redux';
+import { useAppSelector } from '../../utils/hooks';
 
 export const BurgerIngredients: FC = () => {
-  const buns = useSelector(getBuns);
-  const mains = useSelector(getMains);
-  const sauces = useSelector(getSauces);
+  const buns = useAppSelector(getBuns);
+  const mains = useAppSelector(getMains);
+  const sauces = useAppSelector(getSauces);
 
   const [currentTab, setCurrentTab] = useState<TTabMode>('bun');
   const titleBunRef = useRef<HTMLHeadingElement>(null);

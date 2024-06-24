@@ -1,4 +1,3 @@
-import { useSelector } from 'react-redux';
 import {
   getUserIsAuthChecked,
   getUserIsAuthenticated,
@@ -6,6 +5,7 @@ import {
 } from '../services/slices/userSlice';
 import { Navigate } from 'react-router-dom';
 import { Preloader } from './ui/preloader';
+import { useAppSelector } from '../utils/hooks';
 
 type ProtectedRouteProps = {
   onlyUnAuth?: boolean;
@@ -16,9 +16,9 @@ export const ProtectedRoute = ({
   children,
   onlyUnAuth
 }: ProtectedRouteProps) => {
-  const userIsAuthenticated = useSelector(getUserIsAuthenticated);
-  const userIsLoading = useSelector(getUserIsLoading);
-  const userIsAuthChecked = useSelector(getUserIsAuthChecked);
+  const userIsAuthenticated = useAppSelector(getUserIsAuthenticated);
+  const userIsLoading = useAppSelector(getUserIsLoading);
+  const userIsAuthChecked = useAppSelector(getUserIsAuthChecked);
 
   if (!onlyUnAuth && !userIsAuthenticated && userIsAuthChecked) {
     return <Navigate replace to='/login' />;

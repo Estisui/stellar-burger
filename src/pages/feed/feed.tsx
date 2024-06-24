@@ -1,13 +1,12 @@
 import { Preloader } from '@ui';
 import { FeedUI } from '@ui-pages';
 import { FC, useEffect } from 'react';
-import { useSelector } from 'react-redux';
 import { getFeedsThunk, getFeedsOrders } from '../../services/slices/feedSlice';
-import { useDispatch } from '../../services/store';
+import { useAppDispatch, useAppSelector } from '../../utils/hooks';
 
 export const Feed: FC = () => {
-  const orders = useSelector(getFeedsOrders);
-  const dispatch = useDispatch();
+  const orders = useAppSelector(getFeedsOrders);
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     dispatch(getFeedsThunk());

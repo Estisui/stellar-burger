@@ -1,7 +1,6 @@
 import { FC, useMemo } from 'react';
 import { TConstructorIngredient } from '@utils-types';
 import { BurgerConstructorUI } from '@ui';
-import { useSelector } from 'react-redux';
 import {
   getConstructorItems,
   getIngredientsIds
@@ -14,17 +13,17 @@ import {
   getOrderRequest,
   orderBurger
 } from '../../services/slices/orderSlice';
-import { useDispatch } from '../../services/store';
+import { useAppDispatch, useAppSelector } from '../../utils/hooks';
 
 export const BurgerConstructor: FC = () => {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
-  const constructorItems = useSelector(getConstructorItems);
-  const orderRequest = useSelector(getOrderRequest);
-  const orderModalData = useSelector(getOrderModalData);
-  const userIsAuthenticated = useSelector(getUserIsAuthenticated);
-  const ingredientsIds = useSelector(getIngredientsIds);
+  const constructorItems = useAppSelector(getConstructorItems);
+  const orderRequest = useAppSelector(getOrderRequest);
+  const orderModalData = useAppSelector(getOrderModalData);
+  const userIsAuthenticated = useAppSelector(getUserIsAuthenticated);
+  const ingredientsIds = useAppSelector(getIngredientsIds);
 
   const onOrderClick = () => {
     if (!constructorItems.bun || orderRequest) return;
