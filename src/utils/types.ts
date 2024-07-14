@@ -12,6 +12,12 @@ export type TIngredient = {
   image_mobile: string;
 };
 
+export type TIngredientsState = {
+  ingredients: Array<TIngredient>;
+  isLoading: boolean;
+  error: Error | null;
+};
+
 export type TConstructorIngredient = TIngredient & {
   id: string;
 };
