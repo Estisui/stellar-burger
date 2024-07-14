@@ -22,6 +22,11 @@ export type TConstructorIngredient = TIngredient & {
   id: string;
 };
 
+export type TConstructorState = {
+  bun?: TConstructorIngredient;
+  ingredients: Array<TConstructorIngredient>;
+};
+
 export type TOrder = {
   _id: string;
   status: string;
