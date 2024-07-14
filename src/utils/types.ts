@@ -54,6 +54,13 @@ export type TUser = {
   name: string;
 };
 
+export type TUserState = {
+  isLoading: boolean;
+  isAuthChecked: boolean;
+  isAuthenticated: boolean;
+  data: TUser;
+};
+
 export type TFeedState = {
   orders: TOrder[];
   total: number;
