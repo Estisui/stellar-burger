@@ -24,7 +24,7 @@ describe('ingredientsSlice', () => {
     });
   });
 
-  it('should update state with ingredients data and set isLoading to false when furfilled', () => {
+  it('should update state with ingredients data and set isLoading to false when fulfilled', () => {
     const testData = [
       {
         _id: '643d69a5c3f7b9001cfa093c',

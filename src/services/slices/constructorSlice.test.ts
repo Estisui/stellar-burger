@@ -168,7 +168,7 @@ describe('constructorSlice', () => {
     });
   });
 
-  it('should empty constructor when order furfilled', () => {
+  it('should empty constructor when order fulfilled', () => {
     const testOrderResponse: TNewOrderResponse = {
       success: true,
       name: 'Флюоресцентный люминесцентный бургер',
