@@ -1,13 +1,6 @@
-import { TIngredientsState } from '@utils-types';
-import { getIngredientsThunk, ingredientsReducer } from './ingredientsSlice';
+import { getIngredientsThunk, ingredientsReducer, initialState } from './ingredientsSlice';
 
 describe('ingredientsSlice', () => {
-  const initialState: TIngredientsState = {
-    ingredients: [],
-    isLoading: false,
-    error: null
-  };
-
   it('should set isLoading to true and reset error to null when pending', () => {
     const actualState = ingredientsReducer(
       {

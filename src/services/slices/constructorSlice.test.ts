@@ -5,16 +5,13 @@ import {
   constructorReducer,
   deleteIngredient,
   getIngredientsIds,
+  initialState,
   moveDown,
   moveUp
 } from './constructorSlice';
 import { orderBurger } from './orderSlice';
 
 describe('constructorSlice', () => {
-  const initialState: TConstructorState = {
-    ingredients: []
-  };
-
   const testBun = {
     _id: '643d69a5c3f7b9001cfa093c',
     name: 'Краторная булка N-200s',

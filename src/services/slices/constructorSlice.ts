@@ -3,7 +3,7 @@ import { TConstructorIngredient, TConstructorState } from '@utils-types';
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { orderBurger } from './orderSlice';
 
-const initialState: TConstructorState = {
+export const initialState: TConstructorState = {
   ingredients: []
 };
 

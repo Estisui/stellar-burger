@@ -1,6 +1,6 @@
-import { TUserState } from '../../utils/types';
 import {
   getUser,
+  initialState,
   loginUser,
   logoutUser,
   registerUser,
@@ -9,16 +9,6 @@ import {
 } from './userSlice';
 
 describe('userSlice', () => {
-  const initialState: TUserState = {
-    isLoading: false,
-    isAuthChecked: false,
-    isAuthenticated: false,
-    data: {
-      name: '',
-      email: ''
-    }
-  };
-
   const testAuthResponse = {
     success: true,
     accessToken:

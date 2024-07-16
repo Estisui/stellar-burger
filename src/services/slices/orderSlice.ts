@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { TOrderState } from '@utils-types';
 import { getOrderByNumberApi, getOrdersApi, orderBurgerApi } from '@api';
 
-const initialState: TOrderState = {
+export const initialState: TOrderState = {
   orders: [],
   orderRequest: false,
   data: null

@@ -9,9 +9,9 @@ import {
 } from '@api';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { TUserState } from '@utils-types';
-import { deleteCookie, setCookie } from '../../utils/cookie';
+import { setCookie } from '../../utils/cookie';
 
-const initialState: TUserState = {
+export const initialState: TUserState = {
   isLoading: false,
   isAuthChecked: false,
   isAuthenticated: false,

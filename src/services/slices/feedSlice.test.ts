@@ -1,14 +1,7 @@
-import { TFeedState } from '../../utils/types';
-import { feedReducer, getFeedsThunk } from './feedSlice';
+import { feedReducer, getFeedsThunk, initialState } from './feedSlice';
 
 describe('feedSlice', () => {
   it('should update state when fulfilled', () => {
-    const initialState: TFeedState = {
-      orders: [],
-      total: 0,
-      totalToday: 0
-    };
-
     const testResponse = {
       success: true,
       orders: [

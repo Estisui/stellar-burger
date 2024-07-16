@@ -1,20 +1,14 @@
 import { TNewOrderResponse } from '../../utils/burger-api';
-import { TOrderState } from '../../utils/types';
 import {
   clearRequestData,
   getOrderByIdThunk,
   getOrdersThunk,
+  initialState,
   orderBurger,
   orderReducer
 } from './orderSlice';
 
 describe('orderSlice', () => {
-  const initialState: TOrderState = {
-    orders: [],
-    orderRequest: false,
-    data: null
-  };
-
   const testOrders = [
     {
       _id: '6693bb72119d45001b4f8c81',
