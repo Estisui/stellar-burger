@@ -12,8 +12,19 @@ export type TIngredient = {
   image_mobile: string;
 };
 
+export type TIngredientsState = {
+  ingredients: Array<TIngredient>;
+  isLoading: boolean;
+  error: Error | null;
+};
+
 export type TConstructorIngredient = TIngredient & {
   id: string;
+};
+
+export type TConstructorState = {
+  bun?: TConstructorIngredient;
+  ingredients: Array<TConstructorIngredient>;
 };
 
 export type TOrder = {
@@ -32,9 +43,28 @@ export type TOrdersData = {
   totalToday: number;
 };
 
+export type TOrderState = {
+  orders: TOrder[];
+  orderRequest: boolean;
+  data: TOrder | null;
+};
+
 export type TUser = {
   email: string;
   name: string;
+};
+
+export type TUserState = {
+  isLoading: boolean;
+  isAuthChecked: boolean;
+  isAuthenticated: boolean;
+  data: TUser;
+};
+
+export type TFeedState = {
+  orders: TOrder[];
+  total: number;
+  totalToday: number;
 };
 
 export type TTabMode = 'bun' | 'sauce' | 'main';
