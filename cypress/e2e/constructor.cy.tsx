@@ -11,7 +11,7 @@ beforeEach(() => {
 
 describe('Проверяем функциональность приложения', function () {
   it('Добавление ингредиента из списка ингредиентов в конструктор', function () {
-    cy.visit('http://localhost:4000');
+    cy.visit('/');
     cy.get(`[data-cy=constructor]`).contains('Выберите булки');
     cy.contains('Добавить').click();
     cy.get(`[data-cy=constructor]`)
@@ -20,7 +20,7 @@ describe('Проверяем функциональность приложени
   });
 
   it('Открытие модального окна', function () {
-    cy.visit('http://localhost:4000');
+    cy.visit('/');
     cy.contains('булка').click();
     cy.contains('Калории');
     cy.get(`[data-cy=modal] button`).click();
@@ -33,7 +33,7 @@ describe('Проверяем функциональность приложени
     setCookie('accessToken', token.accessToken);
     localStorage.setItem('refreshToken', token.refreshToken);
 
-    cy.visit('http://localhost:4000');
+    cy.visit('/');
     cy.get(`[data-cy=ingredient]`).eq(1).contains('Добавить').click();
     cy.get(`[data-cy=ingredient]`).eq(3).contains('Добавить').click();
     cy.contains('Оформить').click();
